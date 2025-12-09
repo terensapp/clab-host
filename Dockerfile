@@ -11,10 +11,10 @@ RUN dnf -y upgrade
 RUN dnf -y install \
     ca-certificates \
     curl \
-    dnsutils \
+    bind-utils \
     dsniff \
     fping \
-    git-all \
+    git \
     gnupg \
     iputils-* \
     ipcalc \
@@ -29,8 +29,7 @@ RUN dnf -y install \
     python3-pip \
     sudo \
     tzdata \
-    ufw \
-    vim \
+    vim-enhanced \
     wget \
     --allowerasing
 

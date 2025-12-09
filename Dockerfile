@@ -31,7 +31,7 @@ COPY lldp.sh /usr/bin/lldp
 
 RUN systemctl enable lldpd
 
-RUN systemctl start lldpd
+#RUN systemctl start lldpd
 
 RUN pip3 install -r requirements.txt
 

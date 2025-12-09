@@ -16,12 +16,12 @@ RUN dnf -y install \
     fping \
     git \
     gnupg \
-    iputils-* \
+
+RUN dnf -y install \
+    iputils \
     ipcalc \
     iperf \
     iperf3
-
-RUN dnf -y install \
     lldpd \
     mtr \
     nano \

@@ -14,7 +14,7 @@ RUN dnf -y install \
     iputils \
     iperf \
     iperf3 \
-    lldpad \
+    lldpd \
     python3 \
     python3-pip \
     vim-enhanced \

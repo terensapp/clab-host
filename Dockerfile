@@ -16,13 +16,11 @@ RUN dnf -y install \
     fping \
     git \
     gnupg \
-
-RUN dnf -y install \
     iputils \
     ipcalc \
     iperf \
     iperf3
-    lldpad \
+    lldpd \
     mtr \
     nano \
     net-tools \
@@ -43,7 +41,9 @@ COPY hostnetconfig.sh /usr/local/bin/hostnetconfig.sh
 
 COPY lldp.sh /usr/bin/lldp
 
-RUN chmod +x /usr/bin/lldp
+RUN systemctl enable lldpd
+
+RUN systemctl start lldpd
 
 RUN pip3 install -r requirements.txt
 

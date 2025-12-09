@@ -29,10 +29,6 @@ COPY hostnetconfig.sh /usr/local/bin/hostnetconfig.sh
 
 COPY lldp.sh /usr/bin/lldp
 
-RUN systemctl enable lldpd
-
-#RUN systemctl start lldpd
-
 RUN pip3 install -r requirements.txt
 
 RUN ansible-galaxy collection install -r requirements.yml --force
@@ -41,7 +37,7 @@ RUN useradd -rm -d /home/admin -s /bin/bash -g root -G wheel -u 1099 admin
 
 RUN echo admin:admin | chpasswd
 
-CMD ssh-keygen -A && /usr/sbin/sshd && lldpd && sleep infinity
+CMD /usr/sbin/sshd && lldpd && sleep infinity
 
-LABEL maintainer="Mitch Vaughan <mitch@arista.com>" \
-      version="2.0.1"
+LABEL maintainer="Teren Sapp <terensapp@gmail.com>" \
+      version="1.0"

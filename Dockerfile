@@ -14,10 +14,8 @@ RUN dnf -y install \
     iputils \
     iperf \
     iperf3
-    openssh-server \
     python3 \
     python3-pip \
-    sudo \
     vim-enhanced \
     wget \
     --allowerasing

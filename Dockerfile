@@ -37,7 +37,7 @@ RUN useradd -rm -d /home/admin -s /bin/bash -g root -G wheel -u 1099 admin
 
 RUN echo admin:admin | chpasswd
 
-CMD /usr/sbin/sshd && lldpd && sleep infinity
+#CMD /usr/sbin/sshd && lldpd && sleep infinity
 
 LABEL maintainer="Teren Sapp <terensapp@gmail.com>" \
       version="1.0"

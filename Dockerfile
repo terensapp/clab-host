@@ -19,7 +19,9 @@ RUN dnf -y install \
     iputils-* \
     ipcalc \
     iperf \
-    iperf3 \
+    iperf3
+
+RUN dnf -y install \
     lldpd \
     mtr \
     nano \

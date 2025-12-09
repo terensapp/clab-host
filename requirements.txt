@@ -1,0 +1,5 @@
+ansible-core
+pyavd[ansible]
+pyx
+scapy
+install-texlive

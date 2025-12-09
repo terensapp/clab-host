@@ -13,7 +13,9 @@ RUN dnf -y install \
     curl \
     iputils \
     iperf \
-    iperf3
+    iperf3 \
+    python3 \
+    python3-pip \
     vim-enhanced \
     wget \
     --allowerasing

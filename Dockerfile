@@ -11,22 +11,14 @@ RUN dnf -y upgrade
 RUN dnf -y install \
     ca-certificates \
     curl \
-    bind-utils \
-    dsniff \
-    fping \
-    git \
-    gnupg \
     iputils \
-    ipcalc \
     iperf \
     iperf3
-    nano \
     net-tools \
     openssh-server \
     python3 \
     python3-pip \
     sudo \
-    tzdata \
     vim-enhanced \
     wget \
     --allowerasing

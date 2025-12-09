@@ -1,43 +1,52 @@
 FROM almalinux:10
 
-ENV TZ=America/Chicago
-
+# 1. Update & Enable EPEL (Required for lldpd, iperf3, etc.)
 RUN dnf -y update && \
     dnf -y install epel-release && \
-    dnf -y clean all
+    dnf -y config-manager --set-enabled crb && \
+    dnf clean all
 
-RUN dnf -y upgrade
-
+# 2. Install Tools & Services
+#    (Added 'lldpd' to this list)
 RUN dnf -y install \
-    ca-certificates \
+    bind-utils \
     curl \
+    git \
+    iproute \
     iputils \
-    iperf \
-    iperf3 \
     lldpd \
-    python3 \
-    python3-pip \
+    mtr \
+    nano \
+    net-tools \
+    nmap-ncat \
+    nginx \
+    openssh-server \
+    tcpdump \
+    traceroute \
     vim-enhanced \
     wget \
-    --allowerasing
+    python3 \
+    python3-pip \
+    && dnf clean all
 
-COPY requirements.txt requirements.txt
+# --- WEB SERVER SETUP ---
+RUN echo "<html><body><h1>Hello World from Alma 10</h1></body></html>" > /usr/share/nginx/html/index.html
+EXPOSE 80
 
-COPY requirements.yml requirements.yml
+# --- SSH SERVER SETUP ---
+RUN sed -i 's/^#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    echo 'root:password' | chpasswd && \
+    ssh-keygen -A
+EXPOSE 22
+
+WORKDIR /scripts
 
 COPY hostnetconfig.sh /usr/local/bin/hostnetconfig.sh
-
-COPY lldp.sh /usr/bin/lldp
-
-RUN pip3 install -r requirements.txt
-
-RUN ansible-galaxy collection install -r requirements.yml --force
 
 RUN useradd -rm -d /home/admin -s /bin/bash -g root -G wheel -u 1099 admin
 
 RUN echo admin:admin | chpasswd
 
-#CMD /usr/sbin/sshd && lldpd && sleep infinity
-
-LABEL maintainer="Teren Sapp <terensapp@gmail.com>" \
-      version="1.0"
+# --- STARTUP COMMAND ---
+# Start Nginx (bg), SSHD (bg), LLDPD (bg), then sleep forever
+CMD bash -c "nginx && /usr/sbin/sshd && /usr/sbin/lldpd && sleep infinity"

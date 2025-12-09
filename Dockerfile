@@ -14,7 +14,6 @@ RUN dnf -y install \
     iputils \
     iperf \
     iperf3
-    net-tools \
     openssh-server \
     python3 \
     python3-pip \

@@ -20,7 +20,6 @@ RUN dnf -y install \
     ipcalc \
     iperf \
     iperf3
-    lldpd \
     mtr \
     nano \
     net-tools \
